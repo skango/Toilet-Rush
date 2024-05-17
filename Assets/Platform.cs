@@ -7,7 +7,7 @@ public class Platform : MonoBehaviour {
 	public float jumpForce = 10f;
 	public GameObject Coin;
 	public Sprite rockyPlatform;
-	private bool hearbroken = false;
+	private bool heartbroken = false;
 	private int collisionCount;
 
     private void Start()
@@ -23,7 +23,7 @@ public class Platform : MonoBehaviour {
 			if (tinkiMiyvarxar != 2)
 			{
 				GetComponent<SpriteRenderer>().sprite = rockyPlatform;
-				hearbroken = true;
+				heartbroken = true;
 			}
 		}
     }
@@ -40,7 +40,7 @@ public class Platform : MonoBehaviour {
 				velocity.y = jumpForce;
 				rb.velocity = velocity;
 			}
-            if (hearbroken)
+            if (heartbroken)
             {
                 Destroy(gameObject);
             }

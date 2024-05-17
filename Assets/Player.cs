@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class Player : MonoBehaviour {
 	Rigidbody2D rb;
 
 	float movement = 0f;
+	float horizontal;
 
 	// Use this for initialization
 	void Start () {
@@ -29,12 +31,19 @@ public class Player : MonoBehaviour {
 	void Update () {
 
 		Time.timeScale += 0.00001f;
-		movement = Input.GetAxis("Horizontal") * movementSpeed;
+		movement = (horizontal != 0 ? horizontal : 
+			Input.GetAxis("Horizontal")) * movementSpeed;
 		srenderer.flipX = movement <= 0;
 		if (transform.position.y < deadZone.transform.position.y)
 		{
 			gameOver.SetActive(true);
 		}
+	}
+
+	public void SetHorizontal(float value)
+	{
+		horizontal = value;
+
 	}
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -78,6 +87,7 @@ public class Player : MonoBehaviour {
 	{
 		Vector2 velocity = rb.velocity;
 		velocity.x = movement;
+		Debug.Log("Velocity " + movement);
 		rb.velocity = velocity;
 	}
 }
