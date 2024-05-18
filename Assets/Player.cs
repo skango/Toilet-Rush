@@ -54,6 +54,14 @@ public class Player : MonoBehaviour {
 			cointext.text = $"X{coinCounter}";
 			Destroy(collision.gameObject);
 		}
+		if (collision.CompareTag("cherry"))
+		{
+			Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            Vector2 velocity = rb.velocity;
+            velocity.y = 20;
+            rb.velocity = velocity;
+            Destroy(collision.gameObject);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -80,7 +88,7 @@ public class Player : MonoBehaviour {
 
     public void ZessyCloudGamodzaxeba()
 	{
-		Instantiate(ZessyCloud, transform.position + Vector3.right * 6, Quaternion.identity);
+		Instantiate(ZessyCloud, transform.position + Vector3.right * 6 + Vector3.up * 6, Quaternion.identity);
 	}
 
     void FixedUpdate()

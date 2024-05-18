@@ -18,8 +18,13 @@ public class LevelGenerator : MonoBehaviour {
 
 		for (int i = 0; i < numberOfPlatforms; i++)
 		{
+			
 			spawnPosition.y += Random.Range(minY, maxY);
-			spawnPosition.x = Random.Range(-levelWidth, levelWidth);
+            if (i == 0)
+            {
+				spawnPosition.y = 1f;
+            }
+            spawnPosition.x = Random.Range(-levelWidth, levelWidth);
 			Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
 		}
 	}

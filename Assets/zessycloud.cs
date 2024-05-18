@@ -5,9 +5,15 @@ using UnityEngine;
 public class zessycloud : MonoBehaviour
 {
     public float speed = 0.1f;
+    Vector3 startpos;
+    public int x = 1;
+
     private void Update()
     {
-        transform.position += Vector3.left * speed * Time.deltaTime;
+        
+
+        transform.position += x * Vector3.left * speed * Time.deltaTime;
+
 
     }
 
@@ -20,9 +26,16 @@ public class zessycloud : MonoBehaviour
         }
     }
 
+    public void invertX()
+    {
+        x *= -1;
+    }
+
     private IEnumerator Start()
     {
-        yield return new WaitForSeconds(5);
+        InvokeRepeating(nameof(invertX), 2, 2);
+        startpos = transform.position;
+        yield return new WaitForSeconds(20);
         Destroy(gameObject);
     }
 }

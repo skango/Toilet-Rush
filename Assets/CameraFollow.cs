@@ -6,13 +6,13 @@ public class CameraFollow : MonoBehaviour {
 
 	public Transform target;
 	public SpriteRenderer bg;
-	public Sprite meoreBg;
+	public GameObject meoreBg;
 
     private void Update()
     {
         if (target.transform.position.y > 50)
 		{
-			bg.sprite = meoreBg;
+			meoreBg.SetActive(true);
 		}
     }
 

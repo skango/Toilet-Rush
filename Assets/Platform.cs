@@ -5,17 +5,27 @@ using UnityEngine;
 public class Platform : MonoBehaviour {
 
 	public float jumpForce = 10f;
-	public GameObject Coin;
+	public GameObject Coin,cherry;
 	public Sprite rockyPlatform;
 	private bool heartbroken = false;
 	private int collisionCount;
+	public GameObject Chamosxma;
+	public AudioClip JumpSound;
+	private AudioSource source;
 
     private void Start()
     {
-		int tinkiMiyvarxar = UnityEngine.Random.Range(0, 3);
+		source = FindObjectOfType<AudioSource>();
+		int tinkiMiyvarxar = UnityEngine.Random.Range(0, 6);
 		if (tinkiMiyvarxar  == 0)
 		{
 			Coin.SetActive(true);
+		}
+
+		if (tinkiMiyvarxar == 5)
+		{
+			cherry.SetActive(true);
+
 		}
 
 		if (transform.position.y > 50)
@@ -32,6 +42,7 @@ public class Platform : MonoBehaviour {
 	{
 		if (collision.relativeVelocity.y <= 0f)
 		{
+			source.PlayOneShot(JumpSound);
 			collisionCount++;			
 			Rigidbody2D rb = collision.collider.GetComponent<Rigidbody2D>();
 			if (rb != null)
@@ -42,6 +53,7 @@ public class Platform : MonoBehaviour {
 			}
             if (heartbroken)
             {
+				Instantiate(Chamosxma, transform.position, transform.rotation);
                 Destroy(gameObject);
             }
         }
