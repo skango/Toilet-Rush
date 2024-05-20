@@ -14,14 +14,19 @@ public class Player : MonoBehaviour {
 	public Sprite jumber, nodar;
 	public TMP_Text cointext;
 	private int coinCounter;
+	public AudioClip coinsound, boostsound, dedaMoetyna;
 
 	Rigidbody2D rb;
 
 	float movement = 0f;
 	float horizontal;
+	private AudioSource source;
+	private float currentH = 1000;
+
 
 	// Use this for initialization
 	void Start () {
+		source = FindObjectOfType<AudioSource>();
 		Time.timeScale = 1;
 		rb = GetComponent<Rigidbody2D>();
 		InvokeRepeating(nameof(ZessyCloudGamodzaxeba), 10, 10);
@@ -29,14 +34,20 @@ public class Player : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		if (transform.position.y > currentH)
+		{
+			FindObjectOfType<LevelGenerator>().Start();
+			currentH += 500;
+		}
 		Time.timeScale += 0.00001f;
 		movement = (horizontal != 0 ? horizontal : 
 			Input.GetAxis("Horizontal")) * movementSpeed;
 		srenderer.flipX = movement <= 0;
 		if (transform.position.y < deadZone.transform.position.y)
 		{
+			source.PlayOneShot(dedaMoetyna);
 			gameOver.SetActive(true);
+			Destroy(gameObject);
 		}
 	}
 
@@ -46,17 +57,25 @@ public class Player : MonoBehaviour {
 
 	}
 
+	public void dedisTyvna()
+	{
+        source.PlayOneShot(dedaMoetyna);
+		Destroy(gameObject);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("coin"))
 		{
+			source.PlayOneShot(coinsound);
 			coinCounter++;
 			cointext.text = $"X{coinCounter}";
 			Destroy(collision.gameObject);
 		}
 		if (collision.CompareTag("cherry"))
 		{
-			Rigidbody2D rb = GetComponent<Rigidbody2D>();
+            source.PlayOneShot(boostsound);
+            Rigidbody2D rb = GetComponent<Rigidbody2D>();
             Vector2 velocity = rb.velocity;
             velocity.y = 20;
             rb.velocity = velocity;
@@ -88,7 +107,7 @@ public class Player : MonoBehaviour {
 
     public void ZessyCloudGamodzaxeba()
 	{
-		Instantiate(ZessyCloud, transform.position + Vector3.right * 6 + Vector3.up * 6, Quaternion.identity);
+		Instantiate(ZessyCloud, transform.position + Vector3.up * 6, Quaternion.identity);
 	}
 
     void FixedUpdate()

@@ -15,9 +15,14 @@ public class Platform : MonoBehaviour {
 
     private void Start()
     {
+		if (Application.isMobilePlatform)
+		{
+			transform.localScale = Vector3.one * 2.2f;
+		}
+
 		source = FindObjectOfType<AudioSource>();
 		int tinkiMiyvarxar = UnityEngine.Random.Range(0, 6);
-		if (tinkiMiyvarxar  == 0)
+		if (tinkiMiyvarxar  is 0 or 1)
 		{
 			Coin.SetActive(true);
 		}

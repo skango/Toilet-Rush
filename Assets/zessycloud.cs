@@ -22,7 +22,8 @@ public class zessycloud : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             collision.GetComponent<Player>().gameOver.SetActive(true);
-            Destroy(collision.gameObject);
+            collision.GetComponent<Player>().dedisTyvna();
+            //Destroy(collision.gameObject);
         }
     }
 
@@ -33,7 +34,7 @@ public class zessycloud : MonoBehaviour
 
     private IEnumerator Start()
     {
-        InvokeRepeating(nameof(invertX), 2, 2);
+        InvokeRepeating(nameof(invertX), 1.5f, 1.5f);
         startpos = transform.position;
         yield return new WaitForSeconds(20);
         Destroy(gameObject);

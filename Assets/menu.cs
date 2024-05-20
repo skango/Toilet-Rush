@@ -9,4 +9,9 @@ public class menu : MonoBehaviour
     {
         SceneManager.LoadScene(index);
     }
+
+    public void MuteGame(bool state)
+    {
+        AudioListener.volume = state ? 1 : 0;
+    }
 }
