@@ -26,6 +26,10 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		if (Application.isMobilePlatform)
+		{
+			transform.localScale = Vector3.one * 1.1f;
+		}
 		source = FindObjectOfType<AudioSource>();
 		Time.timeScale = 1;
 		rb = GetComponent<Rigidbody2D>();
@@ -107,7 +111,7 @@ public class Player : MonoBehaviour {
 
     public void ZessyCloudGamodzaxeba()
 	{
-		Instantiate(ZessyCloud, transform.position + Vector3.up * 6, Quaternion.identity);
+		Instantiate(ZessyCloud, transform.position + Vector3.right * 1f + Vector3.up * 6, Quaternion.identity);
 	}
 
     void FixedUpdate()

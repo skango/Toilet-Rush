@@ -17,7 +17,7 @@ public class Platform : MonoBehaviour {
     {
 		if (Application.isMobilePlatform)
 		{
-			transform.localScale = Vector3.one * 2.2f;
+			transform.localScale = Vector3.one * 2f;
 		}
 
 		source = FindObjectOfType<AudioSource>();

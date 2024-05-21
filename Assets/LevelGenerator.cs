@@ -24,7 +24,7 @@ public class LevelGenerator : MonoBehaviour
 		}else
 		{
             minY = 2;
-            maxY = 2.5f;
+            maxY = 2.35f;
         }
 		
 
